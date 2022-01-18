@@ -3,6 +3,7 @@ package com.springboot.backend.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class HomeIntController {
@@ -11,5 +12,12 @@ public class HomeIntController {
 		return String.format("Hello,%s",name);
 		
 	}
-
+	@GetMapping("/sayhello")
+	public String sayHello() {
+		String uri="http://localhost:8095/hello";
+		RestTemplate restTemplate=new RestTemplate();
+		String result=restTemplate.getForObject(uri, String.class);
+		return result;
+		
+	}
 }
